@@ -15,7 +15,6 @@ async function main() {
     // Ensure Knex is connected
     const knex = app.get('knex');
     await knex.raw('select 1+1 as result');
-
     console.log('Database is connected successfully');
 
     server = app.listen(config.port, () => {

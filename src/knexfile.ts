@@ -1,4 +1,5 @@
 import type { Knex } from "knex";
+import path from "path";
 
 const config: { [key: string]: Knex.Config } = {
     development: {
@@ -11,20 +12,20 @@ const config: { [key: string]: Knex.Config } = {
             port: 5432,
         },
         migrations: {
-            directory: "./migrations",
+            directory: path.join(__dirname, "../migrations"),
         },
         seeds: {
-            directory: "./seeds",
+            directory: path.join(__dirname, "../seeds"),
         },
     },
     production: {
         client: "pg",
         connection: process.env.DATABASE_URL,
         migrations: {
-            directory: "./migrations",
+            directory: path.join(__dirname, "../migrations"),
         },
         seeds: {
-            directory: "./seeds",
+            directory: path.join(__dirname, "../seeds"),
         },
     },
 };
