@@ -1,4 +1,4 @@
-// migrations/xxxxxx_create_authors_table.ts
+
 import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {

@@ -1,4 +1,4 @@
-// app/models/Book.ts
+
 import { knex } from 'knex';
 import knexConfig from '../../knexfile';
 

@@ -1,4 +1,4 @@
-// app/controllers/authorController.ts
+
 import { Request, Response, NextFunction } from 'express';
 import Author from '../models/author';
 import sendResponse from '../../shared/sendResponse';

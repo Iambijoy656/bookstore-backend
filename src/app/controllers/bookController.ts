@@ -1,12 +1,10 @@
-// app/controllers/bookController.ts
+
 import { Request, Response, NextFunction } from 'express';
 import Book from '../models/book';
 import ApiError from '../../errors/ApiError';
 import httpStatus from 'http-status';
 import { IBook } from '../interfaces';
 import sendResponse from '../../shared/sendResponse';
-
-
 
 
 export const createBook = async (req: Request, res: Response, next: NextFunction) => {
