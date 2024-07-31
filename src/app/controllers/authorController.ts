@@ -32,8 +32,9 @@ export const createAuthor = async (req: Request, res: Response, next: NextFuncti
 
 export const getAllAuthors = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const authors = await Author.getAll();
-        // res.status(200).json(authors);
+        const page = parseInt(req.query.page as string, 10) || 1;
+        const limit = parseInt(req.query.limit as string, 10) || 10;
+        const authors = await Author.getAll(page, limit);
         sendResponse<IAuthor[]>(res, {
             statusCode: httpStatus.OK,
             success: true,
@@ -63,10 +64,7 @@ export const getAuthorById = async (req: Request, res: Response, next: NextFunct
 };
 
 
-
 export const updateAuthor = async (req: Request, res: Response, next: NextFunction) => {
-
-
     try {
         const updatedAuthor = await Author.update(Number(req.params.id), req.body);
         if (Array.isArray(updatedAuthor) && updatedAuthor.length > 0) {
