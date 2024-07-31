@@ -51,12 +51,6 @@ export const getAllBooks = async (req: Request, res: Response, next: NextFunctio
 };
 
 
-
-
-
-
-
-
 export const getBookById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const book = await Book.getById(Number(req.params.id));
@@ -108,6 +102,44 @@ export const deleteBook = async (req: Request, res: Response, next: NextFunction
             success: true,
             message: 'Book Deleted successfully',
 
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+
+export const getBooksByAuthorId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const authorId = parseInt(req.params.id);
+        if (isNaN(authorId)) {
+            throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid author ID');
+        }
+        const books = await Book.getBooksByAuthorId(authorId);
+        sendResponse<IBook[]>(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Books retrieved successfully',
+            data: books,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getBooksBySpecificAuthorId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const authorId = parseInt(req.params.id);
+        if (isNaN(authorId)) {
+            throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid author ID');
+        }
+        const books = await Book.getBooksBySpecificAuthorId(authorId);
+        sendResponse<IBook[]>(res, {
+            statusCode: httpStatus.OK,
+            success: true,
+            message: 'Books retrieved successfully',
+            data: books,
         });
     } catch (error) {
         next(error);

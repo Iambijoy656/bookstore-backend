@@ -42,6 +42,33 @@ const Book = {
     create: (book: { title: string, description?: string, published_date: string, author_id: number }) => db('books').insert(book).returning('*'),
     update: (id: number, book: Partial<{ title: string, description?: string, published_date: string, author_id: number }>) => db('books').where({ id }).update(book).returning('*'),
     delete: (id: number) => db('books').where({ id }).del(),
+
+
+    getBooksByAuthorId: (authorId: number) => {
+        return db('books')
+            .join('authors', 'books.author_id', 'authors.id')
+            .select(
+                'books.id',
+                'books.title',
+                'books.description',
+                'books.published_date',
+                'books.author_id',
+                'authors.name as author_name'
+            )
+            .where('books.author_id', authorId);
+    },
+
+    getBooksBySpecificAuthorId: (authorId: number) => {
+        return db('books')
+            .select('*')
+            .where('author_id', authorId);
+    },
+
+
+
+
+
+
 };
 
 export default Book;
